@@ -93,7 +93,10 @@ fun! s:smart_close(bang)
             silent! exe 'noautocmd q'
             silent! exe 'noautocmd ' . bufwinnr(current_buffer) . 'wincmd w'
         else
-            silent! exe 'q'
+            silent! exe 'bdelete'
+            if len(getbufinfo({'buflisted':1})) == 1
+                silent! exe 'Startify'
+            endif
         endif
     endif
 endfun
